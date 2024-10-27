@@ -85,6 +85,7 @@ def get_example():
             1024,
             1024,
             2.5,
+            1.6,
             50,
             0,
         ],
@@ -96,6 +97,7 @@ def get_example():
             1024,
             1024,
             2.5,
+            1.6,
             50,
             0,
         ],
@@ -107,6 +109,7 @@ def get_example():
             1024,
             1024,
             2.5,
+            1.6,
             50,
             0,
         ],
@@ -118,6 +121,7 @@ def get_example():
             1024,
             1024,
             2.5,
+            1.6,
             50,
             0,
         ],
@@ -129,6 +133,7 @@ def get_example():
             1024,
             1024,
             2.5,
+            1.6,
             50,
             222,
         ],
@@ -140,6 +145,7 @@ def get_example():
             1024,
             1024,
             2.0,
+            1.6,
             50,
             0,
         ],
@@ -151,6 +157,7 @@ def get_example():
             1024,
             1024,
             2,
+            1.6,
             50,
             42,
         ],
@@ -162,6 +169,7 @@ def get_example():
             1024,
             1024,
             2.0,
+            1.6,
             50,
             123,
         ],
@@ -173,6 +181,7 @@ def get_example():
             1024,
             1024,
             2.5,
+            1.6,
             50,
             0,
         ],
@@ -184,14 +193,15 @@ def get_example():
             1024,
             1024,
             2.5,
+            1.6,
             50,
             0,
         ],
     ]
     return case
 
-def run_for_examples(text, img1, img2, img3, height, width, guidance_scale, inference_steps, seed):    
-    return generate_image(text, img1, img2, img3, height, width, guidance_scale, inference_steps, seed)
+def run_for_examples(text, img1, img2, img3, height, width, guidance_scale, img_guidance_scale, inference_steps, seed):    
+    return generate_image(text, img1, img2, img3, height, width, guidance_scale, img_guidance_scale, inference_steps, seed)
 
 description = """
 OmniGen is a unified image generation model that you can use to perform various tasks, including but not limited to text-to-image generation, subject-driven generation, Identity-Preserving Generation, and image-conditioned generation.
@@ -231,6 +241,10 @@ with gr.Blocks() as demo:
                 label="Guidance Scale", minimum=1.0, maximum=10.0, value=3.0, step=0.1
             )
 
+            img_guidance_scale_input = gr.Slider(
+                label="Image Guidance Scale", minimum=1.0, maximum=2.0, value=1.6, step=0.1
+            )
+
             num_inference_steps = gr.Slider(
                 label="Inference Steps", minimum=1, maximum=100, value=50, step=1
             )
@@ -261,6 +275,7 @@ with gr.Blocks() as demo:
             height_input,
             width_input,
             guidance_scale_input,
+            img_guidance_scale_input,
             num_inference_steps,
             seed_input,
             Quantization,
@@ -279,6 +294,7 @@ with gr.Blocks() as demo:
             height_input,
             width_input,
             guidance_scale_input,
+            img_guidance_scale_input,
             num_inference_steps,
             seed_input,
             Quantization,
