@@ -166,7 +166,7 @@ def get_example():
             123,
         ],
         [
-            "<img><|image_1|><\/img> What item can be used to see the current time? Please remove it.",
+            "<img><|image_1|></img> What item can be used to see the current time? Please remove it.",
             "./imgs/test_cases/watch.jpg",
             None,
             None,
@@ -177,7 +177,7 @@ def get_example():
             0,
         ],
         [
-            "Three guitars are displayed side by side on a rustic wooden stage, each showcasing its unique character and style. The left guitar is <img><|image_1|><\/img>. The middle guitar is <img><|image_2|><\/img>. The right guitars is <img><|image_3|><\/img>.",
+            "Three guitars are displayed side by side on a rustic wooden stage, each showcasing its unique character and style. The left guitar is <img><|image_1|></img>. The middle guitar is <img><|image_2|></img>. The right guitars is <img><|image_3|></img>.",
             "./imgs/test_cases/guitar1.png",
             "./imgs/test_cases/guitar1.png",
             "./imgs/test_cases/guitar1.png",
@@ -191,14 +191,14 @@ def get_example():
     return case
 
 def run_for_examples(text, img1, img2, img3, height, width, guidance_scale, inference_steps, seed):    
-    return generate_image(text, img1, img2, img3, height, width, guidance_scale, inference_steps, seed)
+    return generate_image(text, img1, img2, img3, height, width, guidance_scale, guidance_scale, inference_steps, seed, Quantization)
 
 description = """
 OmniGen is a unified image generation model that you can use to perform various tasks, including but not limited to text-to-image generation, subject-driven generation, Identity-Preserving Generation, and image-conditioned generation.
 
 For multi-modal to image generation, you should pass a string as `prompt`, and a list of image paths as `input_images`. The placeholder in the prompt should be in the format of `<img><|image_*|></img>`.
 For example, use a image of a woman to generate a new image:
-prompt = "A woman holds a bouquet of flowers and faces the camera. Thw woman is \<img\>\<|image_1|\>\</img\>."
+prompt = "A woman holds a bouquet of flowers and faces the camera. Thw woman is <img><|image_1|></img>."
 """
 
 # Gradio 接口
@@ -260,6 +260,7 @@ with gr.Blocks() as demo:
             image_input_3,
             height_input,
             width_input,
+            guidance_scale_input,
             guidance_scale_input,
             num_inference_steps,
             seed_input,
